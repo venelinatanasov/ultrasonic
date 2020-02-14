@@ -20,7 +20,8 @@ void loop() {
   digitalWrite(trig, HIGH);
   delayMicroseconds(10);
   digitalWrite(trig, LOW);
-  t=pulseIn(echo, HIGH, 8000);
+  t=pulseIn(echo, HIGH, 80000);
+  if(!t){return;}
   dist=(340*t);
   dist/=10000;
   
