@@ -21,9 +21,10 @@ void loop() {
   delayMicroseconds(10);
   digitalWrite(trig, LOW);
   t=pulseIn(echo, HIGH, 8000);
-  //t=t/1000000;
-  //dist=(340*t);
-  Serial.println(t);
+  dist=(340*t);
+  dist/=10000;
+  
+  Serial.println(dist);
   
 
 }
