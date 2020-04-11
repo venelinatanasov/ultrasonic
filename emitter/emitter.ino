@@ -8,7 +8,7 @@ void setup() {
 
 void loop() {
   digitalWrite(ledpin, LOW);
-  delay(20);
+  delay(10);
   digitalWrite(ledpin, HIGH);
   delayMicroseconds(120);
   
