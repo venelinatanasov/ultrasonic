@@ -1,49 +1,51 @@
-#define irsig 10
+#define irsig 12
 #define trig 8
 #define echo 9
 #define led 11
-#define IRtolerance 0.2
+#define irtolerance 0.1
 int all;
 
 void setup() {
-  pinMode(irsig, INPUT);
+
   pinMode(trig, OUTPUT);
+  pinMode(irsig,INPUT);
+  //digitalWrite(trig,LOW);
   pinMode(echo, INPUT);
+  pinMode(led,OUTPUT);
   Serial.begin(9600);
-  all=calibrate();
+  //all=calibrate();
 
 }
 
 void loop() {
-  
+  //delay(100);
   unsigned long t;
   float dist;
-  while(digitalRead(irsig)==HIGH){}
-  unsigned long x=millis();
-  while(digitalRead(irsig)==LOW){
-    if(millis()-x>1000){all=calibrate();return;}
-  }
+  while(digitalRead(irsig)){}
+  while(!digitalRead(irsig)){}
+ 
   digitalWrite(trig, HIGH);
   delayMicroseconds(10);
   digitalWrite(trig, LOW);
-  t=pulseIn(echo, HIGH, 80000);
+  t=pulseIn(echo, HIGH,10000);
   if(!t){return;}
   dist=(340*t);
   dist/=10000;
-  
+  //dist+=10;
+  Serial.println("dist");
   Serial.println(dist);
-  
+ 
 
 }
-int calibrate(){
+/*int calibrate(){
   int a;
-  unsigned long all=0;
+  unsigned long all1;
  for(int i=0;i<100;i++){
-   a=analogRead(A0);
-   all+=a;
+   a=analogRead(irsig);
+   delay(1);
+   all1+=a;
  }
- all=all/100;
- return all;
- 
+ all1=all1/100;
+  return all1;
   
-}
+}*/
